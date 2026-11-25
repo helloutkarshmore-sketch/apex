@@ -182,3 +182,23 @@ footer { background:var(--navy);color:var(--on-navy); } .footer-grid { padding-b
 @media(prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none!important;transition:none!important;scroll-behavior:auto!important; } }
 .product-card > .product-save.apex-button { position:absolute; left:auto; right:12px; top:12px; }
 @media(max-width:760px) { .product-card > .product-save.apex-button { right:9px; top:9px; } }
+@media(max-width:760px) {
+  html,body { overflow-x:hidden; }
+  .header-inner { min-height:132px; }
+  .search-box { min-height:42px; }
+  .search-box .search-category { display:flex; min-width:108px; padding-inline:10px; font-size:9px; }
+  .search-box input { min-width:0; font-size:10px; }
+  .search-button { min-width:42px; }
+  .category-dropdown { width:min(280px,calc(100vw - 32px)); }
+  .header-action { min-width:42px; min-height:42px; }
+  .mobile-menu-button { min-width:42px; min-height:42px; }
+  .product-card { min-width:0; }
+  .product-photo { min-height:150px; }
+  .product-card-info { min-height:235px; display:flex; flex-direction:column; }
+  .product-bottom { margin-top:auto; padding-top:12px; }
+  .product-bottom .add-button { min-height:38px; }
+  .hero-actions a { min-height:40px; }
+  .admin-tabs { width:100%; overflow-x:auto; flex-wrap:nowrap; scrollbar-width:none; }
+  .admin-tabs::-webkit-scrollbar { display:none; }
+  .admin-tabs button { flex:0 0 auto; min-height:40px; }
+}
