@@ -1,0 +1,3 @@
+CREATE POLICY apex_document_insert ON storage.objects FOR INSERT TO authenticated WITH CHECK(bucket_id='enquiry-documents' AND (storage.foldername(name))[1]=auth.uid()::text);
+CREATE POLICY apex_document_read ON storage.objects FOR SELECT TO authenticated USING(bucket_id='enquiry-documents' AND ((storage.foldername(name))[1]=auth.uid()::text OR public.can_manage('order')));
+CREATE POLICY apex_document_delete ON storage.objects FOR DELETE TO authenticated USING(bucket_id='enquiry-documents' AND (storage.foldername(name))[1]=auth.uid()::text);

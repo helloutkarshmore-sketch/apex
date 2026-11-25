@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-labelledby="title desc">
+  <title id="title">Apex Electricals product image</title>
+  <desc id="desc">Placeholder illustration for an electrical product</desc>
+  <rect width="800" height="600" fill="#eef4f5"/>
+  <path d="M0 470h800v130H0z" fill="#dce9eb"/>
+  <g fill="none" stroke="#0d5961" stroke-width="18" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="245" y="135" width="310" height="285" rx="28" fill="#fff"/>
+    <path d="M325 205h150M325 270h150M325 335h80"/>
+    <path d="m470 335 42-42M512 293v-55"/>
+    <circle cx="512" cy="205" r="24" fill="#f6b73c" stroke="#0d5961"/>
+  </g>
+  <text x="400" y="520" text-anchor="middle" font-family="Arial,sans-serif" font-size="30" font-weight="700" fill="#0d5961">APEX ELECTRICALS</text>
+</svg>

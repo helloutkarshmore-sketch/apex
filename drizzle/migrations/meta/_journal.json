@@ -1,0 +1,41 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1795575240810,
+      "tag": "0000_apex_commerce_foundation",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1795575556714,
+      "tag": "0001_secure_enquiry_documents",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1795575949251,
+      "tag": "0002_secure_owner_bootstrap_and_rpc_access",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1795575999088,
+      "tag": "0003_validate_enquiries_and_inventory_history",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1795576058430,
+      "tag": "0004_validate_saved_basket_inventory",
+      "breakpoints": true
+    }
+  ]
+}

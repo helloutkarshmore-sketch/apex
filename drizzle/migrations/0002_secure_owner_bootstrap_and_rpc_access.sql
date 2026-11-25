@@ -1,0 +1,15 @@
+CREATE TABLE public.admin_invitations (email text PRIMARY KEY, role public.app_role NOT NULL DEFAULT 'super_admin'); GRANT ALL ON public.admin_invitations TO service_role; ALTER TABLE public.admin_invitations ENABLE ROW LEVEL SECURITY;
+INSERT INTO public.admin_invitations(email,role) VALUES('utkarshmore9869@gmail.com','super_admin');
+CREATE FUNCTION public.apply_verified_admin_invitation() RETURNS trigger LANGUAGE plpgsql SECURITY DEFINER SET search_path=public AS $$ BEGIN IF NEW.email_confirmed_at IS NOT NULL THEN INSERT INTO public.user_roles(user_id,role) SELECT NEW.id,role FROM public.admin_invitations WHERE email=lower(NEW.email) ON CONFLICT(user_id,role) DO NOTHING; END IF; RETURN NEW; END $$;
+REVOKE ALL ON FUNCTION public.apply_verified_admin_invitation() FROM PUBLIC,anon,authenticated;
+CREATE TRIGGER apex_verified_admin AFTER INSERT OR UPDATE OF email_confirmed_at,email ON auth.users FOR EACH ROW EXECUTE FUNCTION public.apply_verified_admin_invitation();
+REVOKE ALL ON FUNCTION public.create_profile() FROM PUBLIC,anon,authenticated;
+REVOKE ALL ON FUNCTION public.record_order_status() FROM PUBLIC,anon,authenticated;
+REVOKE ALL ON FUNCTION public.claim_submission(text) FROM PUBLIC,anon,authenticated;
+GRANT EXECUTE ON FUNCTION public.claim_submission(text) TO service_role;
+REVOKE ALL ON FUNCTION public.has_role(uuid,public.app_role) FROM PUBLIC,anon;
+GRANT EXECUTE ON FUNCTION public.has_role(uuid,public.app_role) TO authenticated,service_role;
+REVOKE ALL ON FUNCTION public.can_manage(text) FROM PUBLIC,anon;
+GRANT EXECUTE ON FUNCTION public.can_manage(text) TO authenticated,service_role;
+CREATE INDEX cart_product_idx ON public.cart_items(product_id);
+CREATE INDEX wishlist_product_idx ON public.wishlist_items(product_id);
