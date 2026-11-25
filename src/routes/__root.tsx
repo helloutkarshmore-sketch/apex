@@ -85,7 +85,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     // twitter:image here: every page without its own would inherit the root's preview image.
     meta: [
       { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "viewport", content: "width=1024, initial-scale=1, minimum-scale=0.5" },
       { title: "Apex Electricals" },
       { name: "description", content: "Electrical and industrial products from Apex Electricals, Pune." },
       { name: "author", content: "Apex Electricals" },
