@@ -1,0 +1,14 @@
+import { useEffect, useRef, useState, type PointerEvent } from 'react';
+import { Maximize2, RotateCcw, RotateCw } from 'lucide-react';
+import type { Product } from '@/lib/commerce';
+import { productImage } from '@/lib/product-images';
+
+export function ProductViewer({ product }: { product: Product }) {
+  const [rotation, setRotation] = useState(0); const [autoRotate, setAutoRotate] = useState(false); const [dragging, setDragging] = useState(false); const startX = useRef(0); const startRotation = useRef(0);
+  useEffect(() => { if (!autoRotate) return; const timer = window.setInterval(() => setRotation((value) => (value + 1) % 360), 40); return () => window.clearInterval(timer); }, [autoRotate]);
+  function startDrag(event: PointerEvent<HTMLDivElement>) { event.currentTarget.setPointerCapture(event.pointerId); startX.current = event.clientX; startRotation.current = rotation; setDragging(true); setAutoRotate(false); }
+  function moveDrag(event: PointerEvent<HTMLDivElement>) { if (!dragging) return; const delta = (event.clientX - startX.current) * 0.55; setRotation((startRotation.current + delta + 360) % 360); }
+  function stopDrag(event: PointerEvent<HTMLDivElement>) { if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId); setDragging(false); }
+  const normalized = ((rotation % 360) + 360) % 360; const perspective = Math.sin((normalized * Math.PI) / 180);
+  return <div className="product-viewer-shell"><div className={`product-viewer${dragging ? ' is-dragging' : ''}`} onPointerDown={startDrag} onPointerMove={moveDrag} onPointerUp={stopDrag} onPointerCancel={stopDrag} role="img" aria-label={`${product.name} interactive product view`}><div className="product-viewer-glow" /><div className="product-viewer-object" style={{ transform: `perspective(900px) rotateY(${perspective * 8}deg) rotateX(${Math.cos((normalized * Math.PI) / 180) * 2}deg) scale(${1 + Math.abs(perspective) * 0.025})` }}><img src={productImage(product.image_key, product.image_url)} alt={product.name} draggable={false} /></div><span className="product-viewer-hint">Drag to rotate product view</span></div><div className="product-viewer-toolbar"><button type="button" onClick={() => setRotation((value) => value - 30)} aria-label="Rotate product left"><RotateCcw size={16} /></button><button type="button" className={autoRotate ? 'active' : ''} onClick={() => setAutoRotate((value) => !value)} aria-pressed={autoRotate}><span className="viewer-spin-mark">360</span>{autoRotate ? 'Stop rotation' : 'Auto rotate'}</button><button type="button" onClick={() => setRotation((value) => value + 30)} aria-label="Rotate product right"><RotateCw size={16} /></button><button type="button" onClick={() => setRotation(0)} aria-label="Reset product view"><Maximize2 size={15} /></button></div><p className="product-viewer-note">Interactive preview · detailed model and exact finish confirmed with quotation.</p></div>;
+}
