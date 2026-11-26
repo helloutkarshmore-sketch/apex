@@ -14,7 +14,8 @@ import appCss from "../styles.css?url";
 import { Button } from '@/components/ui/button';
 import { Toaster } from '@/components/ui/sonner';
 import { CommerceProvider } from '@/components/commerce-provider';
-import { StoreHeader, StoreFooter, WhatsAppWidget } from '@/components/store-shell';
+import { StoreHeader, StoreFooter } from '@/components/store-shell';
+import { SupportWidget } from '@/components/support-widget';
 import { catalogOptions } from '@/lib/commerce.functions';
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
@@ -137,5 +138,5 @@ function RootComponent() {
 
 function StoreLayout() {
   const { data } = useQuery(catalogOptions);
-  return <><StoreHeader products={data?.products ?? []} /><Outlet /><StoreFooter /><WhatsAppWidget /></>;
+  return <><StoreHeader products={data?.products ?? []} /><Outlet /><StoreFooter /><SupportWidget products={data?.products ?? []} /></>;
 }
