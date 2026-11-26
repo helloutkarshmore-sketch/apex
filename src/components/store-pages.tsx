@@ -10,6 +10,7 @@ import { cartTotals, money, canPurchase, unitPrice } from '@/lib/commerce';
 import { ProductCard, QuantityControl } from './product-card';
 import { useCommerce } from './commerce-provider';
 import { supabase } from '@/integrations/supabase/client';
+import { apexContact } from '@/lib/contact';
 
 export function PageFrame({ title,subtitle,children }: { title:string;subtitle?:string;children:ReactNode }) { return <main className="container-apex page-main"><div className="breadcrumb"><Link to="/">Home</Link><ChevronRight/><span>{title}</span></div><h1 className="page-title">{title}</h1>{subtitle&&<p className="page-subtitle">{subtitle}</p>}{children}</main>; }
 export function Empty({ title,text,icon='package',action=true }: { title:string;text:string;icon?:'package'|'cart'|'heart'|'lock';action?:boolean }) { const Icon=icon==='cart'?ShoppingCart:icon==='heart'?Heart:icon==='lock'?LockKeyhole:Package;return <div className="empty-state"><Icon/><h2>{title}</h2><p>{text}</p>{action&&<Button asChild><Link to="/shop" search={{q:'',category:''}}>Explore Products<ArrowRight/></Link></Button>}</div>; }
